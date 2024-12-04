@@ -1,0 +1,52 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+defaultTasks 'clear',  'test', 'aggregate'
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    api 'org.apache.poi:poi-ooxml:3.15'
+    api 'org.apache.poi:poi:3.15'
+    api 'log4j:log4j:1.2.16'
+    api 'org.apache.logging.log4j:log4j-api:2.16.0'
+    api 'org.apache.logging.log4j:log4j-core:2.16.0'
+    api 'net.serenity-bdd:serenity-cucumber:4.1.0'
+    api 'net.serenity-bdd:serenity-junit:4.1.0'
+    api 'net.serenity-bdd:serenity-core:4.1.0'
+    api 'net.serenity-bdd:serenity-screenplay:4.1.0'
+    api 'net.serenity-bdd:serenity-screenplay-webdriver:4.1.0'
+    api 'org.slf4j:slf4j-simple:1.7.7'
+    api 'junit:junit:4.12'
+    api 'com.codoid.products:fillo:1.18'
+    api 'io.rest-assured:rest-assured:4.1.2'
+    api 'io.github.bonigarcia:webdrivermanager:5.6.4'
+}
+
+group = 'co.com.sap.qa'
+version = '1.0-SNAPSHOT'
+description = 'Sap'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
